@@ -1,0 +1,24520 @@
+xquery version "3.0";
+
+module namespace db5-common="http://docbook.org/apps/docbook/5/common";
+
+declare namespace db="http://docbook.org/ns/docbook";
+
+declare function db5-common:process-node($node as node()?, $model as map()) {
+    if ($node) then 
+    typeswitch($node) 
+        case text() return $node 
+        case element(db:abbrev) return db5-common:abbrev($node, $model)
+        case element(db:abstract) return db5-common:abstract($node, $model)
+        case element(db:accel) return db5-common:accel($node, $model)
+        case element(db:acknowledgements) return db5-common:acknowledgements($node, $model)
+        case element(db:acronym) return db5-common:acronym($node, $model)
+        case element(db:address) return db5-common:address($node, $model)
+        case element(db:affiliation) return db5-common:affiliation($node, $model)
+        case element(db:alt) return db5-common:alt($node, $model)
+        case element(db:anchor) return db5-common:anchor($node, $model)
+        case element(db:annotation) return db5-common:annotation($node, $model)
+        case element(db:answer) return db5-common:answer($node, $model)
+        case element(db:appendix) return db5-common:appendix($node, $model)
+        case element(db:application) return db5-common:application($node, $model)
+        case element(db:arc) return db5-common:arc($node, $model)
+        case element(db:area) return db5-common:area($node, $model)
+        case element(db:areaset) return db5-common:areaset($node, $model)
+        case element(db:areaspec) return db5-common:areaspec($node, $model)
+        case element(db:arg) return db5-common:arg($node, $model)
+        case element(db:article) return db5-common:article($node, $model)
+        case element(db:artpagenums) return db5-common:artpagenums($node, $model)
+        case element(db:attribution) return db5-common:attribution($node, $model)
+        case element(db:audiodata) return db5-common:audiodata($node, $model)
+        case element(db:audioobject) return db5-common:audioobject($node, $model)
+        case element(db:author) return db5-common:author($node, $model)
+        case element(db:authorgroup) return db5-common:authorgroup($node, $model)
+        case element(db:authorinitials) return db5-common:authorinitials($node, $model)
+        case element(db:bibliocoverage) return db5-common:bibliocoverage($node, $model)
+        case element(db:bibliodiv) return db5-common:bibliodiv($node, $model)
+        case element(db:biblioentry) return db5-common:biblioentry($node, $model)
+        case element(db:bibliography) return db5-common:bibliography($node, $model)
+        case element(db:biblioid) return db5-common:biblioid($node, $model)
+        case element(db:bibliolist) return db5-common:bibliolist($node, $model)
+        case element(db:bibliomisc) return db5-common:bibliomisc($node, $model)
+        case element(db:bibliomixed) return db5-common:bibliomixed($node, $model)
+        case element(db:bibliomset) return db5-common:bibliomset($node, $model)
+        case element(db:biblioref) return db5-common:biblioref($node, $model)
+        case element(db:bibliorelation) return db5-common:bibliorelation($node, $model)
+        case element(db:biblioset) return db5-common:biblioset($node, $model)
+        case element(db:bibliosource) return db5-common:bibliosource($node, $model)
+        case element(db:blockquote) return db5-common:blockquote($node, $model)
+        case element(db:book) return db5-common:book($node, $model)
+        case element(db:bridgehead) return db5-common:bridgehead($node, $model)
+        case element(db:callout) return db5-common:callout($node, $model)
+        case element(db:calloutlist) return db5-common:calloutlist($node, $model)
+        case element(db:caption) return db5-common:caption($node, $model)
+        case element(db:caution) return db5-common:caution($node, $model)
+        case element(db:chapter) return db5-common:chapter($node, $model)
+        case element(db:citation) return db5-common:citation($node, $model)
+        case element(db:citebiblioid) return db5-common:citebiblioid($node, $model)
+        case element(db:citerefentry) return db5-common:citerefentry($node, $model)
+        case element(db:citetitle) return db5-common:citetitle($node, $model)
+        case element(db:city) return db5-common:city($node, $model)
+        case element(db:classname) return db5-common:classname($node, $model)
+        case element(db:classsynopsis) return db5-common:classsynopsis($node, $model)
+        case element(db:classsynopsisinfo) return db5-common:classsynopsisinfo($node, $model)
+        case element(db:cmdsynopsis) return db5-common:cmdsynopsis($node, $model)
+        case element(db:co) return db5-common:co($node, $model)
+        case element(db:code) return db5-common:code($node, $model)
+        case element(db:col) return db5-common:col($node, $model)
+        case element(db:colgroup) return db5-common:colgroup($node, $model)
+        case element(db:collab) return db5-common:collab($node, $model)
+        case element(db:colophon) return db5-common:colophon($node, $model)
+        case element(db:colspec) return db5-common:colspec($node, $model)
+        case element(db:command) return db5-common:command($node, $model)
+        case element(db:computeroutput) return db5-common:computeroutput($node, $model)
+        case element(db:confdates) return db5-common:confdates($node, $model)
+        case element(db:confgroup) return db5-common:confgroup($node, $model)
+        case element(db:confnum) return db5-common:confnum($node, $model)
+        case element(db:confsponsor) return db5-common:confsponsor($node, $model)
+        case element(db:conftitle) return db5-common:conftitle($node, $model)
+        case element(db:constant) return db5-common:constant($node, $model)
+        case element(db:constraint) return db5-common:constraint($node, $model)
+        case element(db:constraintdef) return db5-common:constraintdef($node, $model)
+        case element(db:constructorsynopsis) return db5-common:constructorsynopsis($node, $model)
+        case element(db:contractnum) return db5-common:contractnum($node, $model)
+        case element(db:contractsponsor) return db5-common:contractsponsor($node, $model)
+        case element(db:contrib) return db5-common:contrib($node, $model)
+        case element(db:copyright) return db5-common:copyright($node, $model)
+        case element(db:coref) return db5-common:coref($node, $model)
+        case element(db:country) return db5-common:country($node, $model)
+        case element(db:cover) return db5-common:cover($node, $model)
+        case element(db:database) return db5-common:database($node, $model)
+        case element(db:date) return db5-common:date($node, $model)
+        case element(db:dedication) return db5-common:dedication($node, $model)
+        case element(db:destructorsynopsis) return db5-common:destructorsynopsis($node, $model)
+        case element(db:edition) return db5-common:edition($node, $model)
+        case element(db:editor) return db5-common:editor($node, $model)
+        case element(db:email) return db5-common:email($node, $model)
+        case element(db:emphasis) return db5-common:emphasis($node, $model)
+        case element(db:entry) return db5-common:entry($node, $model)
+        case element(db:entrytbl) return db5-common:entrytbl($node, $model)
+        case element(db:envar) return db5-common:envar($node, $model)
+        case element(db:epigraph) return db5-common:epigraph($node, $model)
+        case element(db:equation) return db5-common:equation($node, $model)
+        case element(db:errorcode) return db5-common:errorcode($node, $model)
+        case element(db:errorname) return db5-common:errorname($node, $model)
+        case element(db:errortext) return db5-common:errortext($node, $model)
+        case element(db:errortype) return db5-common:errortype($node, $model)
+        case element(db:example) return db5-common:example($node, $model)
+        case element(db:exceptionname) return db5-common:exceptionname($node, $model)
+        case element(db:extendedlink) return db5-common:extendedlink($node, $model)
+        case element(db:fax) return db5-common:fax($node, $model)
+        case element(db:fieldsynopsis) return db5-common:fieldsynopsis($node, $model)
+        case element(db:figure) return db5-common:figure($node, $model)
+        case element(db:filename) return db5-common:filename($node, $model)
+        case element(db:firstname) return db5-common:firstname($node, $model)
+        case element(db:firstterm) return db5-common:firstterm($node, $model)
+        case element(db:footnote) return db5-common:footnote($node, $model)
+        case element(db:footnoteref) return db5-common:footnoteref($node, $model)
+        case element(db:foreignphrase) return db5-common:foreignphrase($node, $model)
+        case element(db:formalpara) return db5-common:formalpara($node, $model)
+        case element(db:funcdef) return db5-common:funcdef($node, $model)
+        case element(db:funcparams) return db5-common:funcparams($node, $model)
+        case element(db:funcprototype) return db5-common:funcprototype($node, $model)
+        case element(db:funcsynopsis) return db5-common:funcsynopsis($node, $model)
+        case element(db:funcsynopsisinfo) return db5-common:funcsynopsisinfo($node, $model)
+        case element(db:function) return db5-common:function($node, $model)
+        case element(db:glossary) return db5-common:glossary($node, $model)
+        case element(db:glossdef) return db5-common:glossdef($node, $model)
+        case element(db:glossdiv) return db5-common:glossdiv($node, $model)
+        case element(db:glossentry) return db5-common:glossentry($node, $model)
+        case element(db:glosslist) return db5-common:glosslist($node, $model)
+        case element(db:glosssee) return db5-common:glosssee($node, $model)
+        case element(db:glossseealso) return db5-common:glossseealso($node, $model)
+        case element(db:glossterm) return db5-common:glossterm($node, $model)
+        case element(db:group) return db5-common:group($node, $model)
+        case element(db:guibutton) return db5-common:guibutton($node, $model)
+        case element(db:guiicon) return db5-common:guiicon($node, $model)
+        case element(db:guilabel) return db5-common:guilabel($node, $model)
+        case element(db:guimenu) return db5-common:guimenu($node, $model)
+        case element(db:guimenuitem) return db5-common:guimenuitem($node, $model)
+        case element(db:guisubmenu) return db5-common:guisubmenu($node, $model)
+        case element(db:hardware) return db5-common:hardware($node, $model)
+        case element(db:holder) return db5-common:holder($node, $model)
+        case element(db:honorific) return db5-common:honorific($node, $model)
+        case element(db:imagedata) return db5-common:imagedata($node, $model)
+        case element(db:imageobject) return db5-common:imageobject($node, $model)
+        case element(db:imageobjectco) return db5-common:imageobjectco($node, $model)
+        case element(db:important) return db5-common:important($node, $model)
+        case element(db:index) return db5-common:index($node, $model)
+        case element(db:indexdiv) return db5-common:indexdiv($node, $model)
+        case element(db:indexentry) return db5-common:indexentry($node, $model)
+        case element(db:indexterm) return db5-common:indexterm($node, $model)
+        case element(db:info) return db5-common:info($node, $model)
+        case element(db:informalequation) return db5-common:informalequation($node, $model)
+        case element(db:informalexample) return db5-common:informalexample($node, $model)
+        case element(db:informalfigure) return db5-common:informalfigure($node, $model)
+        case element(db:informaltable) return db5-common:informaltable($node, $model)
+        case element(db:initializer) return db5-common:initializer($node, $model)
+        case element(db:inlineequation) return db5-common:inlineequation($node, $model)
+        case element(db:inlinemediaobject) return db5-common:inlinemediaobject($node, $model)
+        case element(db:interfacename) return db5-common:interfacename($node, $model)
+        case element(db:issuenum) return db5-common:issuenum($node, $model)
+        case element(db:itemizedlist) return db5-common:itemizedlist($node, $model)
+        case element(db:itermset) return db5-common:itermset($node, $model)
+        case element(db:jobtitle) return db5-common:jobtitle($node, $model)
+        case element(db:keycap) return db5-common:keycap($node, $model)
+        case element(db:keycode) return db5-common:keycode($node, $model)
+        case element(db:keycombo) return db5-common:keycombo($node, $model)
+        case element(db:keysym) return db5-common:keysym($node, $model)
+        case element(db:keyword) return db5-common:keyword($node, $model)
+        case element(db:keywordset) return db5-common:keywordset($node, $model)
+        case element(db:label) return db5-common:label($node, $model)
+        case element(db:legalnotice) return db5-common:legalnotice($node, $model)
+        case element(db:lhs) return db5-common:lhs($node, $model)
+        case element(db:lineage) return db5-common:lineage($node, $model)
+        case element(db:lineannotation) return db5-common:lineannotation($node, $model)
+        case element(db:link) return db5-common:link($node, $model)
+        case element(db:listitem) return db5-common:listitem($node, $model)
+        case element(db:literal) return db5-common:literal($node, $model)
+        case element(db:literallayout) return db5-common:literallayout($node, $model)
+        case element(db:locator) return db5-common:locator($node, $model)
+        case element(db:manvolnum) return db5-common:manvolnum($node, $model)
+        case element(db:markup) return db5-common:markup($node, $model)
+        case element(db:mathphrase) return db5-common:mathphrase($node, $model)
+        case element(db:mediaobject) return db5-common:mediaobject($node, $model)
+        case element(db:member) return db5-common:member($node, $model)
+        case element(db:menuchoice) return db5-common:menuchoice($node, $model)
+        case element(db:methodname) return db5-common:methodname($node, $model)
+        case element(db:methodparam) return db5-common:methodparam($node, $model)
+        case element(db:methodsynopsis) return db5-common:methodsynopsis($node, $model)
+        case element(db:modifier) return db5-common:modifier($node, $model)
+        case element(db:mousebutton) return db5-common:mousebutton($node, $model)
+        case element(db:msg) return db5-common:msg($node, $model)
+        case element(db:msgaud) return db5-common:msgaud($node, $model)
+        case element(db:msgentry) return db5-common:msgentry($node, $model)
+        case element(db:msgexplan) return db5-common:msgexplan($node, $model)
+        case element(db:msginfo) return db5-common:msginfo($node, $model)
+        case element(db:msglevel) return db5-common:msglevel($node, $model)
+        case element(db:msgmain) return db5-common:msgmain($node, $model)
+        case element(db:msgorig) return db5-common:msgorig($node, $model)
+        case element(db:msgrel) return db5-common:msgrel($node, $model)
+        case element(db:msgset) return db5-common:msgset($node, $model)
+        case element(db:msgsub) return db5-common:msgsub($node, $model)
+        case element(db:msgtext) return db5-common:msgtext($node, $model)
+        case element(db:nonterminal) return db5-common:nonterminal($node, $model)
+        case element(db:note) return db5-common:note($node, $model)
+        case element(db:olink) return db5-common:olink($node, $model)
+        case element(db:ooclass) return db5-common:ooclass($node, $model)
+        case element(db:ooexception) return db5-common:ooexception($node, $model)
+        case element(db:oointerface) return db5-common:oointerface($node, $model)
+        case element(db:option) return db5-common:option($node, $model)
+        case element(db:optional) return db5-common:optional($node, $model)
+        case element(db:orderedlist) return db5-common:orderedlist($node, $model)
+        case element(db:org) return db5-common:org($node, $model)
+        case element(db:orgdiv) return db5-common:orgdiv($node, $model)
+        case element(db:orgname) return db5-common:orgname($node, $model)
+        case element(db:otheraddr) return db5-common:otheraddr($node, $model)
+        case element(db:othercredit) return db5-common:othercredit($node, $model)
+        case element(db:othername) return db5-common:othername($node, $model)
+        case element(db:package) return db5-common:package($node, $model)
+        case element(db:pagenums) return db5-common:pagenums($node, $model)
+        case element(db:para) return db5-common:para($node, $model)
+        case element(db:paramdef) return db5-common:paramdef($node, $model)
+        case element(db:parameter) return db5-common:parameter($node, $model)
+        case element(db:part) return db5-common:part($node, $model)
+        case element(db:partintro) return db5-common:partintro($node, $model)
+        case element(db:person) return db5-common:person($node, $model)
+        case element(db:personblurb) return db5-common:personblurb($node, $model)
+        case element(db:personname) return db5-common:personname($node, $model)
+        case element(db:phone) return db5-common:phone($node, $model)
+        case element(db:phrase) return db5-common:phrase($node, $model)
+        case element(db:pob) return db5-common:pob($node, $model)
+        case element(db:postcode) return db5-common:postcode($node, $model)
+        case element(db:preface) return db5-common:preface($node, $model)
+        case element(db:primary) return db5-common:primary($node, $model)
+        case element(db:primaryie) return db5-common:primaryie($node, $model)
+        case element(db:printhistory) return db5-common:printhistory($node, $model)
+        case element(db:procedure) return db5-common:procedure($node, $model)
+        case element(db:production) return db5-common:production($node, $model)
+        case element(db:productionrecap) return db5-common:productionrecap($node, $model)
+        case element(db:productionset) return db5-common:productionset($node, $model)
+        case element(db:productname) return db5-common:productname($node, $model)
+        case element(db:productnumber) return db5-common:productnumber($node, $model)
+        case element(db:programlisting) return db5-common:programlisting($node, $model)
+        case element(db:programlistingco) return db5-common:programlistingco($node, $model)
+        case element(db:prompt) return db5-common:prompt($node, $model)
+        case element(db:property) return db5-common:property($node, $model)
+        case element(db:pubdate) return db5-common:pubdate($node, $model)
+        case element(db:publisher) return db5-common:publisher($node, $model)
+        case element(db:publishername) return db5-common:publishername($node, $model)
+        case element(db:qandadiv) return db5-common:qandadiv($node, $model)
+        case element(db:qandaentry) return db5-common:qandaentry($node, $model)
+        case element(db:qandaset) return db5-common:qandaset($node, $model)
+        case element(db:question) return db5-common:question($node, $model)
+        case element(db:quote) return db5-common:quote($node, $model)
+        case element(db:refclass) return db5-common:refclass($node, $model)
+        case element(db:refdescriptor) return db5-common:refdescriptor($node, $model)
+        case element(db:refentry) return db5-common:refentry($node, $model)
+        case element(db:refentrytitle) return db5-common:refentrytitle($node, $model)
+        case element(db:reference) return db5-common:reference($node, $model)
+        case element(db:refmeta) return db5-common:refmeta($node, $model)
+        case element(db:refmiscinfo) return db5-common:refmiscinfo($node, $model)
+        case element(db:refname) return db5-common:refname($node, $model)
+        case element(db:refnamediv) return db5-common:refnamediv($node, $model)
+        case element(db:refpurpose) return db5-common:refpurpose($node, $model)
+        case element(db:refsect1) return db5-common:refsect1($node, $model)
+        case element(db:refsect2) return db5-common:refsect2($node, $model)
+        case element(db:refsect3) return db5-common:refsect3($node, $model)
+        case element(db:refsection) return db5-common:refsection($node, $model)
+        case element(db:refsynopsisdiv) return db5-common:refsynopsisdiv($node, $model)
+        case element(db:releaseinfo) return db5-common:releaseinfo($node, $model)
+        case element(db:remark) return db5-common:remark($node, $model)
+        case element(db:replaceable) return db5-common:replaceable($node, $model)
+        case element(db:returnvalue) return db5-common:returnvalue($node, $model)
+        case element(db:revdescription) return db5-common:revdescription($node, $model)
+        case element(db:revhistory) return db5-common:revhistory($node, $model)
+        case element(db:revision) return db5-common:revision($node, $model)
+        case element(db:revnumber) return db5-common:revnumber($node, $model)
+        case element(db:revremark) return db5-common:revremark($node, $model)
+        case element(db:rhs) return db5-common:rhs($node, $model)
+        case element(db:row) return db5-common:row($node, $model)
+        case element(db:sbr) return db5-common:sbr($node, $model)
+        case element(db:screen) return db5-common:screen($node, $model)
+        case element(db:screenco) return db5-common:screenco($node, $model)
+        case element(db:screenshot) return db5-common:screenshot($node, $model)
+        case element(db:secondary) return db5-common:secondary($node, $model)
+        case element(db:secondaryie) return db5-common:secondaryie($node, $model)
+        case element(db:sect1) return db5-common:sect1($node, $model)
+        case element(db:sect2) return db5-common:sect2($node, $model)
+        case element(db:sect3) return db5-common:sect3($node, $model)
+        case element(db:sect4) return db5-common:sect4($node, $model)
+        case element(db:sect5) return db5-common:sect5($node, $model)
+        case element(db:section) return db5-common:section($node, $model)
+        case element(db:see) return db5-common:see($node, $model)
+        case element(db:seealso) return db5-common:seealso($node, $model)
+        case element(db:seealsoie) return db5-common:seealsoie($node, $model)
+        case element(db:seeie) return db5-common:seeie($node, $model)
+        case element(db:seg) return db5-common:seg($node, $model)
+        case element(db:seglistitem) return db5-common:seglistitem($node, $model)
+        case element(db:segmentedlist) return db5-common:segmentedlist($node, $model)
+        case element(db:segtitle) return db5-common:segtitle($node, $model)
+        case element(db:seriesvolnums) return db5-common:seriesvolnums($node, $model)
+        case element(db:set) return db5-common:set($node, $model)
+        case element(db:setindex) return db5-common:setindex($node, $model)
+        case element(db:shortaffil) return db5-common:shortaffil($node, $model)
+        case element(db:shortcut) return db5-common:shortcut($node, $model)
+        case element(db:sidebar) return db5-common:sidebar($node, $model)
+        case element(db:simpara) return db5-common:simpara($node, $model)
+        case element(db:simplelist) return db5-common:simplelist($node, $model)
+        case element(db:simplemsgentry) return db5-common:simplemsgentry($node, $model)
+        case element(db:simplesect) return db5-common:simplesect($node, $model)
+        case element(db:spanspec) return db5-common:spanspec($node, $model)
+        case element(db:state) return db5-common:state($node, $model)
+        case element(db:step) return db5-common:step($node, $model)
+        case element(db:stepalternatives) return db5-common:stepalternatives($node, $model)
+        case element(db:street) return db5-common:street($node, $model)
+        case element(db:subject) return db5-common:subject($node, $model)
+        case element(db:subjectset) return db5-common:subjectset($node, $model)
+        case element(db:subjectterm) return db5-common:subjectterm($node, $model)
+        case element(db:subscript) return db5-common:subscript($node, $model)
+        case element(db:substeps) return db5-common:substeps($node, $model)
+        case element(db:subtitle) return db5-common:subtitle($node, $model)
+        case element(db:superscript) return db5-common:superscript($node, $model)
+        case element(db:surname) return db5-common:surname($node, $model)
+        case element(db:symbol) return db5-common:symbol($node, $model)
+        case element(db:synopfragment) return db5-common:synopfragment($node, $model)
+        case element(db:synopfragmentref) return db5-common:synopfragmentref($node, $model)
+        case element(db:synopsis) return db5-common:synopsis($node, $model)
+        case element(db:systemitem) return db5-common:systemitem($node, $model)
+        case element(db:table) return db5-common:table($node, $model)
+        case element(db:tag) return db5-common:tag($node, $model)
+        case element(db:task) return db5-common:task($node, $model)
+        case element(db:taskprerequisites) return db5-common:taskprerequisites($node, $model)
+        case element(db:taskrelated) return db5-common:taskrelated($node, $model)
+        case element(db:tasksummary) return db5-common:tasksummary($node, $model)
+        case element(db:tbody) return db5-common:tbody($node, $model)
+        case element(db:td) return db5-common:td($node, $model)
+        case element(db:term) return db5-common:term($node, $model)
+        case element(db:termdef) return db5-common:termdef($node, $model)
+        case element(db:tertiary) return db5-common:tertiary($node, $model)
+        case element(db:tertiaryie) return db5-common:tertiaryie($node, $model)
+        case element(db:textdata) return db5-common:textdata($node, $model)
+        case element(db:textobject) return db5-common:textobject($node, $model)
+        case element(db:tfoot) return db5-common:tfoot($node, $model)
+        case element(db:tgroup) return db5-common:tgroup($node, $model)
+        case element(db:th) return db5-common:th($node, $model)
+        case element(db:thead) return db5-common:thead($node, $model)
+        case element(db:tip) return db5-common:tip($node, $model)
+        case element(db:title) return db5-common:title($node, $model)
+        case element(db:titleabbrev) return db5-common:titleabbrev($node, $model)
+        case element(db:toc) return db5-common:toc($node, $model)
+        case element(db:tocdiv) return db5-common:tocdiv($node, $model)
+        case element(db:tocentry) return db5-common:tocentry($node, $model)
+        case element(db:token) return db5-common:token($node, $model)
+        case element(db:tr) return db5-common:tr($node, $model)
+        case element(db:trademark) return db5-common:trademark($node, $model)
+        case element(db:type) return db5-common:type($node, $model)
+        case element(db:uri) return db5-common:uri($node, $model)
+        case element(db:userinput) return db5-common:userinput($node, $model)
+        case element(db:varargs) return db5-common:varargs($node, $model)
+        case element(db:variablelist) return db5-common:variablelist($node, $model)
+        case element(db:varlistentry) return db5-common:varlistentry($node, $model)
+        case element(db:varname) return db5-common:varname($node, $model)
+        case element(db:videodata) return db5-common:videodata($node, $model)
+        case element(db:videoobject) return db5-common:videoobject($node, $model)
+        case element(db:void) return db5-common:void($node, $model)
+        case element(db:volumenum) return db5-common:volumenum($node, $model)
+        case element(db:warning) return db5-common:warning($node, $model)
+        case element(db:wordasword) return db5-common:wordasword($node, $model)
+        case element(db:xref) return db5-common:xref($node, $model)
+        case element(db:year) return db5-common:year($node, $model)
+        default return     element {$node/name()} { $node/@*, db5-common:recurse($node, $model) } 
+    else () 
+};
+
+declare function db5-common:recurse($node as node()?, $model as map()) as item()* {
+    if ($node) then for $cnode in $node/node() return db5-common:process-node($cnode, $model) else ()
+};
+
+declare function db5-common:abbrev($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        trademark
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:abstract($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        anchor
+        formalpara
+        info
+        para
+        simpara
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:accel($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:acknowledgements($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:acronym($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        trademark
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:address($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        continuation
+        dir
+        href
+        id
+        lang
+        language
+        linenumbering
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        space
+        startinglinenumber
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        city
+        country
+        email
+        fax
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        otheraddr
+        personname
+        phone
+        phrase
+        pob
+        postcode
+        remark
+        replaceable
+        state
+        street
+        subscript
+        superscript
+        uri
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:affiliation($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        jobtitle
+        org
+        orgdiv
+        orgname
+        shortaffil
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:alt($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        inlinemediaobject
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:anchor($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:annotation($node as node(), $model as map()) {
+    (: Attributes:
+        annotates
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:answer($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        label
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:appendix($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossary
+        glosslist
+        important
+        index
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        refentry
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        sect1
+        section
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        toc
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:application($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:arc($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        from
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        to
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:area($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        coords
+        dir
+        id
+        label
+        lang
+        linkends
+        os
+        otherunits
+        remap
+        revision
+        revisionflag
+        role
+        security
+        units
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:areaset($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        label
+        lang
+        linkends
+        os
+        otherunits
+        remap
+        revision
+        revisionflag
+        role
+        security
+        units
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        area
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:areaspec($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherunits
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        units
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        area
+        areaset
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:arg($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        choice
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        rep
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        arg
+        biblioref
+        group
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        option
+        phrase
+        remark
+        replaceable
+        sbr
+        subscript
+        superscript
+        synopfragmentref
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:article($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        acknowledgements
+        address
+        anchor
+        annotation
+        appendix
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        colophon
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossary
+        glosslist
+        important
+        index
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        refentry
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        sect1
+        section
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        toc
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:artpagenums($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:attribution($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        citation
+        citetitle
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        person
+        personname
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:audiodata($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        entityref
+        fileref
+        format
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:audioobject($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        audiodata
+        info
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:author($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        affiliation
+        contrib
+        email
+        orgdiv
+        orgname
+        personblurb
+        personname
+        uri
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:authorgroup($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        author
+        editor
+        othercredit
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:authorinitials($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:bibliocoverage($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherspatial
+        othertemporal
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        spatial
+        temporal
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:bibliodiv($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        biblioentry
+        bibliolist
+        bibliomixed
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:biblioentry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        abstract
+        acronym
+        address
+        annotation
+        artpagenums
+        author
+        authorgroup
+        authorinitials
+        bibliocoverage
+        biblioid
+        bibliomisc
+        bibliomset
+        bibliorelation
+        biblioset
+        bibliosource
+        citebiblioid
+        citerefentry
+        citetitle
+        collab
+        confgroup
+        contractnum
+        contractsponsor
+        copyright
+        coref
+        cover
+        date
+        edition
+        editor
+        emphasis
+        extendedlink
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        glossterm
+        issuenum
+        itermset
+        keywordset
+        legalnotice
+        mediaobject
+        org
+        orgname
+        othercredit
+        pagenums
+        person
+        personblurb
+        personname
+        phrase
+        printhistory
+        productname
+        productnumber
+        pubdate
+        publisher
+        publishername
+        quote
+        releaseinfo
+        revhistory
+        seriesvolnums
+        subjectset
+        subscript
+        subtitle
+        superscript
+        title
+        titleabbrev
+        volumenum
+        wordasword
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:bibliography($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliodiv
+        biblioentry
+        bibliolist
+        bibliomixed
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:biblioid($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherclass
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:bibliolist($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        biblioentry
+        bibliolist
+        bibliomixed
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:bibliomisc($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:bibliomixed($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        abstract
+        acronym
+        address
+        annotation
+        artpagenums
+        author
+        authorgroup
+        authorinitials
+        bibliocoverage
+        biblioid
+        bibliomisc
+        bibliomset
+        bibliorelation
+        biblioset
+        bibliosource
+        citebiblioid
+        citerefentry
+        citetitle
+        collab
+        confgroup
+        contractnum
+        contractsponsor
+        copyright
+        coref
+        cover
+        date
+        edition
+        editor
+        emphasis
+        extendedlink
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        glossterm
+        issuenum
+        itermset
+        keywordset
+        legalnotice
+        mediaobject
+        org
+        orgname
+        othercredit
+        pagenums
+        person
+        personblurb
+        personname
+        phrase
+        printhistory
+        productname
+        productnumber
+        pubdate
+        publisher
+        publishername
+        quote
+        releaseinfo
+        revhistory
+        seriesvolnums
+        subjectset
+        subscript
+        subtitle
+        superscript
+        title
+        titleabbrev
+        volumenum
+        wordasword
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:bibliomset($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        relation
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        abstract
+        acronym
+        address
+        alt
+        anchor
+        annotation
+        artpagenums
+        author
+        authorgroup
+        authorinitials
+        bibliocoverage
+        biblioid
+        bibliomisc
+        bibliomset
+        biblioref
+        bibliorelation
+        biblioset
+        bibliosource
+        citebiblioid
+        citerefentry
+        citetitle
+        collab
+        confgroup
+        contractnum
+        contractsponsor
+        copyright
+        coref
+        cover
+        date
+        edition
+        editor
+        emphasis
+        extendedlink
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        glossterm
+        indexterm
+        inlinemediaobject
+        issuenum
+        itermset
+        keywordset
+        legalnotice
+        link
+        mediaobject
+        olink
+        org
+        orgname
+        othercredit
+        pagenums
+        person
+        personblurb
+        personname
+        phrase
+        printhistory
+        productname
+        productnumber
+        pubdate
+        publisher
+        publishername
+        quote
+        releaseinfo
+        remark
+        replaceable
+        revhistory
+        seriesvolnums
+        subjectset
+        subscript
+        subtitle
+        superscript
+        title
+        titleabbrev
+        volumenum
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:biblioref($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        begin
+        condition
+        conformance
+        dir
+        end
+        endterm
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        units
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+        xrefstyle
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:bibliorelation($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherclass
+        othertype
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:biblioset($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        relation
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        abstract
+        acronym
+        address
+        annotation
+        artpagenums
+        author
+        authorgroup
+        authorinitials
+        bibliocoverage
+        biblioid
+        bibliomisc
+        bibliomset
+        bibliorelation
+        biblioset
+        bibliosource
+        citebiblioid
+        citerefentry
+        citetitle
+        collab
+        confgroup
+        contractnum
+        contractsponsor
+        copyright
+        coref
+        cover
+        date
+        edition
+        editor
+        emphasis
+        extendedlink
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        glossterm
+        issuenum
+        itermset
+        keywordset
+        legalnotice
+        mediaobject
+        org
+        orgname
+        othercredit
+        pagenums
+        person
+        personblurb
+        personname
+        phrase
+        printhistory
+        productname
+        productnumber
+        pubdate
+        publisher
+        publishername
+        quote
+        releaseinfo
+        revhistory
+        seriesvolnums
+        subjectset
+        subscript
+        subtitle
+        superscript
+        title
+        titleabbrev
+        volumenum
+        wordasword
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:bibliosource($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherclass
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:blockquote($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        attribution
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:book($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        acknowledgements
+        appendix
+        article
+        bibliography
+        chapter
+        colophon
+        dedication
+        glossary
+        index
+        info
+        part
+        preface
+        reference
+        subtitle
+        title
+        titleabbrev
+        toc
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:bridgehead($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherrenderas
+        remap
+        renderas
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:callout($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        arearefs
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:calloutlist($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        callout
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:caption($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        style
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:caution($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:chapter($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossary
+        glosslist
+        important
+        index
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        refentry
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        sect1
+        section
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        toc
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:citation($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:citebiblioid($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherclass
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:citerefentry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        manvolnum
+        refentrytitle
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:citetitle($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        pubwork
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:city($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:classname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:classsynopsis($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        language
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        classsynopsisinfo
+        constructorsynopsis
+        destructorsynopsis
+        fieldsynopsis
+        methodsynopsis
+        ooclass
+        ooexception
+        oointerface
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:classsynopsisinfo($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        continuation
+        dir
+        href
+        id
+        lang
+        language
+        linenumbering
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        space
+        startinglinenumber
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        co
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        info
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        lineannotation
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        textobject
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:cmdsynopsis($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        cmdlength
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        sepchar
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        arg
+        command
+        group
+        info
+        sbr
+        synopfragment
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:co($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        label
+        lang
+        linkends
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:code($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        language
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        classname
+        exceptionname
+        function
+        indexterm
+        initializer
+        inlinemediaobject
+        interfacename
+        link
+        methodname
+        modifier
+        olink
+        ooclass
+        ooexception
+        oointerface
+        parameter
+        phrase
+        remark
+        replaceable
+        returnvalue
+        subscript
+        superscript
+        type
+        varname
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:col($node as node(), $model as map()) {
+    (: Attributes:
+        align
+        annotations
+        arch
+        audience
+        base
+        char
+        charoff
+        class
+        condition
+        conformance
+        dir
+        id
+        lang
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        os
+        remap
+        revision
+        revisionflag
+        security
+        span
+        style
+        title
+        userlevel
+        valign
+        vendor
+        version
+        width
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:colgroup($node as node(), $model as map()) {
+    (: Attributes:
+        align
+        annotations
+        arch
+        audience
+        base
+        char
+        charoff
+        class
+        condition
+        conformance
+        dir
+        id
+        lang
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        os
+        remap
+        revision
+        revisionflag
+        security
+        span
+        style
+        title
+        userlevel
+        valign
+        vendor
+        version
+        width
+        wordsize
+        xreflabel
+   Child Elements:
+        col
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:collab($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        affiliation
+        org
+        orgname
+        person
+        personname
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:colophon($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:colspec($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        align
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        char
+        charoff
+        colname
+        colnum
+        colsep
+        colwidth
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        rowsep
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:command($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:computeroutput($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        co
+        code
+        command
+        computeroutput
+        constant
+        email
+        envar
+        filename
+        indexterm
+        inlinemediaobject
+        link
+        literal
+        markup
+        nonterminal
+        olink
+        option
+        optional
+        package
+        parameter
+        prompt
+        property
+        remark
+        replaceable
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        uri
+        userinput
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:confdates($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:confgroup($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        confdates
+        confnum
+        confsponsor
+        conftitle
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:confnum($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:confsponsor($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:conftitle($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:constant($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:constraint($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:constraintdef($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:constructorsynopsis($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        language
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        exceptionname
+        methodname
+        methodparam
+        modifier
+        void
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:contractnum($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:contractsponsor($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:contrib($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:copyright($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        holder
+        year
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:coref($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:country($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:cover($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        fieldsynopsis
+        formalpara
+        funcsynopsis
+        glosslist
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        task
+        variablelist
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:database($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:date($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:dedication($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:destructorsynopsis($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        language
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        exceptionname
+        methodname
+        methodparam
+        modifier
+        void
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:edition($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:editor($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        affiliation
+        contrib
+        email
+        orgdiv
+        orgname
+        personblurb
+        personname
+        uri
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:email($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:emphasis($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:entry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        align
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        char
+        charoff
+        colname
+        colsep
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        morerows
+        nameend
+        namest
+        os
+        remap
+        revision
+        revisionflag
+        role
+        rotate
+        rowsep
+        security
+        show
+        spanname
+        title
+        type
+        userlevel
+        valign
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        address
+        alt
+        anchor
+        annotation
+        application
+        author
+        bibliolist
+        biblioref
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        classsynopsis
+        cmdsynopsis
+        code
+        command
+        computeroutput
+        constant
+        constraintdef
+        constructorsynopsis
+        coref
+        database
+        date
+        destructorsynopsis
+        editor
+        email
+        emphasis
+        envar
+        epigraph
+        equation
+        errorcode
+        errorname
+        errortext
+        errortype
+        example
+        exceptionname
+        fieldsynopsis
+        figure
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        formalpara
+        funcsynopsis
+        function
+        glosslist
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        itemizedlist
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        literallayout
+        markup
+        mediaobject
+        menuchoice
+        methodname
+        methodsynopsis
+        modifier
+        mousebutton
+        msgset
+        nonterminal
+        note
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        orderedlist
+        org
+        orgname
+        package
+        para
+        parameter
+        person
+        personname
+        phrase
+        procedure
+        productionset
+        productname
+        productnumber
+        programlisting
+        programlistingco
+        prompt
+        property
+        qandaset
+        quote
+        remark
+        replaceable
+        returnvalue
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        shortcut
+        sidebar
+        simpara
+        simplelist
+        subscript
+        superscript
+        symbol
+        synopsis
+        systemitem
+        table
+        tag
+        task
+        termdef
+        tip
+        token
+        trademark
+        type
+        uri
+        userinput
+        variablelist
+        varname
+        warning
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:entrytbl($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        align
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        char
+        charoff
+        colname
+        cols
+        colsep
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        nameend
+        namest
+        os
+        remap
+        revision
+        revisionflag
+        role
+        rowsep
+        security
+        show
+        spanname
+        tgroupstyle
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        colspec
+        spanspec
+        tbody
+        thead
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:envar($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:epigraph($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        anchor
+        attribution
+        formalpara
+        info
+        literallayout
+        para
+        simpara
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:equation($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        floatstyle
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        pgwide
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        caption
+        info
+        mathphrase
+        mediaobject
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:errorcode($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:errorname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:errortext($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:errortype($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:example($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        floatstyle
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        pgwide
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        width
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caption
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:exceptionname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:extendedlink($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        arc
+        locator
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:fax($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:fieldsynopsis($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        language
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        initializer
+        modifier
+        type
+        varname
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:figure($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        floatstyle
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        pgwide
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caption
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:filename($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        path
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:firstname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:firstterm($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        baseform
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:footnote($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:footnoteref($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:foreignphrase($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        acronym
+        anchor
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        coref
+        database
+        date
+        editor
+        emphasis
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        glossterm
+        hardware
+        indexterm
+        inlinemediaobject
+        jobtitle
+        link
+        olink
+        org
+        orgname
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        quote
+        subscript
+        superscript
+        trademark
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:formalpara($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        indexterm
+        info
+        para
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:funcdef($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        function
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        type
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:funcparams($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:funcprototype($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        funcdef
+        modifier
+        paramdef
+        varargs
+        void
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:funcsynopsis($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        language
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        funcprototype
+        funcsynopsisinfo
+        info
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:funcsynopsisinfo($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        continuation
+        dir
+        href
+        id
+        lang
+        language
+        linenumbering
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        space
+        startinglinenumber
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        co
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        info
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        lineannotation
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        textobject
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:function($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:glossary($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossdiv
+        glossentry
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:glossdef($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        subject
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        glossseealso
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:glossdiv($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossentry
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:glossentry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        sortas
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        acronym
+        glossdef
+        glosssee
+        glossterm
+        indexterm
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:glosslist($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossentry
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:glosssee($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherterm
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:glossseealso($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherterm
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:glossterm($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        baseform
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:group($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        choice
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        rep
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        arg
+        group
+        option
+        replaceable
+        sbr
+        synopfragmentref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:guibutton($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        accel
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:guiicon($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        accel
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:guilabel($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        accel
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:guimenu($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        accel
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:guimenuitem($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        accel
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:guisubmenu($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        accel
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:hardware($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:holder($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:honorific($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:imagedata($node as node(), $model as map()) {
+    (: Attributes:
+        align
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        contentdepth
+        contentwidth
+        depth
+        dir
+        entityref
+        fileref
+        format
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        scale
+        scalefit
+        security
+        userlevel
+        valign
+        vendor
+        version
+        width
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:imageobject($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        imagedata
+        info
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:imageobjectco($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        areaspec
+        calloutlist
+        imageobject
+        info
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:important($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:index($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexdiv
+        indexentry
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:indexdiv($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexentry
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:indexentry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        primaryie
+        secondaryie
+        seealsoie
+        seeie
+        tertiaryie
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:indexterm($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        pagenum
+        remap
+        revision
+        revisionflag
+        role
+        scope
+        security
+        show
+        significance
+        startref
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+        zone
+   Child Elements:
+        primary
+        secondary
+        see
+        seealso
+        tertiary
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:info($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abstract
+        address
+        annotation
+        artpagenums
+        author
+        authorgroup
+        authorinitials
+        bibliocoverage
+        biblioid
+        bibliomisc
+        bibliomset
+        bibliorelation
+        biblioset
+        bibliosource
+        collab
+        confgroup
+        contractnum
+        contractsponsor
+        copyright
+        cover
+        date
+        edition
+        editor
+        extendedlink
+        issuenum
+        itermset
+        keywordset
+        legalnotice
+        mediaobject
+        org
+        orgname
+        othercredit
+        pagenums
+        printhistory
+        productname
+        productnumber
+        pubdate
+        publisher
+        publishername
+        releaseinfo
+        revhistory
+        seriesvolnums
+        subjectset
+        subtitle
+        title
+        titleabbrev
+        volumenum
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:informalequation($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        caption
+        info
+        mathphrase
+        mediaobject
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:informalexample($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        floatstyle
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        width
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caption
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:informalfigure($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        floatstyle
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        pgwide
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caption
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:informaltable($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        border
+        cellpadding
+        cellspacing
+        class
+        colsep
+        condition
+        conformance
+        dir
+        floatstyle
+        frame
+        href
+        id
+        lang
+        linkend
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        orient
+        os
+        pgwide
+        remap
+        revision
+        revisionflag
+        role
+        rowheader
+        rowsep
+        rules
+        security
+        show
+        style
+        summary
+        tabstyle
+        title
+        type
+        userlevel
+        vendor
+        version
+        width
+        wordsize
+        xreflabel
+   Child Elements:
+        col
+        colgroup
+        info
+        mediaobject
+        tbody
+        textobject
+        tfoot
+        tgroup
+        thead
+        tr
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:initializer($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:inlineequation($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        inlinemediaobject
+        mathphrase
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:inlinemediaobject($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        audioobject
+        imageobject
+        imageobjectco
+        info
+        textobject
+        videoobject
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:interfacename($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:issuenum($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:itemizedlist($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        mark
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        spacing
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        listitem
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:itermset($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        indexterm
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:jobtitle($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:keycap($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        function
+        href
+        id
+        lang
+        linkend
+        os
+        otherfunction
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:keycode($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:keycombo($node as node(), $model as map()) {
+    (: Attributes:
+        action
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otheraction
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        keycap
+        keycombo
+        keysym
+        mousebutton
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:keysym($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:keyword($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:keywordset($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        keyword
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:label($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:legalnotice($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:lhs($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:lineage($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:lineannotation($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:link($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        endterm
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+        xrefstyle
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:listitem($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        override
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:literal($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:literallayout($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        continuation
+        dir
+        href
+        id
+        lang
+        language
+        linenumbering
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        space
+        startinglinenumber
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        co
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        info
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        lineannotation
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        textobject
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:locator($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        label
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:manvolnum($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:markup($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:mathphrase($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        emphasis
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:mediaobject($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        audioobject
+        caption
+        imageobject
+        imageobjectco
+        info
+        textobject
+        videoobject
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:member($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:menuchoice($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        shortcut
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:methodname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:methodparam($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        choice
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        rep
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        funcparams
+        initializer
+        modifier
+        parameter
+        type
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:methodsynopsis($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        language
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        exceptionname
+        methodname
+        methodparam
+        modifier
+        type
+        void
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:modifier($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        space
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:mousebutton($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msg($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        msgmain
+        msgrel
+        msgsub
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msgaud($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msgentry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        msg
+        msgexplan
+        msginfo
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msgexplan($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msginfo($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        msgaud
+        msglevel
+        msgorig
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msglevel($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msgmain($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        msgtext
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msgorig($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msgrel($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        msgtext
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msgset($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        msgentry
+        simplemsgentry
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msgsub($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        msgtext
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:msgtext($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:nonterminal($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        def
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:note($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:olink($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        localinfo
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        targetdoc
+        targetptr
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+        xrefstyle
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:ooclass($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        classname
+        modifier
+        package
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:ooexception($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        exceptionname
+        modifier
+        package
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:oointerface($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        interfacename
+        modifier
+        package
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:option($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:optional($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:orderedlist($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        continuation
+        dir
+        href
+        id
+        inheritnum
+        lang
+        linkend
+        numeration
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        spacing
+        startingnumber
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        listitem
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:org($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        affiliation
+        email
+        orgdiv
+        orgname
+        uri
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:orgdiv($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:orgname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherclass
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:otheraddr($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:othercredit($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherclass
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        affiliation
+        contrib
+        email
+        orgdiv
+        orgname
+        personblurb
+        personname
+        uri
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:othername($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:package($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:pagenums($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:para($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        address
+        alt
+        anchor
+        annotation
+        application
+        author
+        bibliolist
+        biblioref
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        classsynopsis
+        cmdsynopsis
+        code
+        command
+        computeroutput
+        constant
+        constraintdef
+        constructorsynopsis
+        coref
+        database
+        date
+        destructorsynopsis
+        editor
+        email
+        emphasis
+        envar
+        epigraph
+        equation
+        errorcode
+        errorname
+        errortext
+        errortype
+        example
+        exceptionname
+        fieldsynopsis
+        figure
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        funcsynopsis
+        function
+        glosslist
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        itemizedlist
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        literallayout
+        markup
+        mediaobject
+        menuchoice
+        methodname
+        methodsynopsis
+        modifier
+        mousebutton
+        msgset
+        nonterminal
+        note
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        orderedlist
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        procedure
+        productionset
+        productname
+        productnumber
+        programlisting
+        programlistingco
+        prompt
+        property
+        qandaset
+        quote
+        remark
+        replaceable
+        returnvalue
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        shortcut
+        sidebar
+        simplelist
+        subscript
+        superscript
+        symbol
+        synopsis
+        systemitem
+        table
+        tag
+        task
+        termdef
+        tip
+        token
+        trademark
+        type
+        uri
+        userinput
+        variablelist
+        varname
+        warning
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:paramdef($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        choice
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        funcparams
+        indexterm
+        initializer
+        inlinemediaobject
+        link
+        olink
+        parameter
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        type
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:parameter($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:part($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        acknowledgements
+        appendix
+        article
+        bibliography
+        chapter
+        colophon
+        dedication
+        glossary
+        index
+        info
+        partintro
+        preface
+        refentry
+        reference
+        subtitle
+        title
+        titleabbrev
+        toc
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:partintro($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        refentry
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        sect1
+        section
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:person($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        affiliation
+        email
+        personblurb
+        personname
+        uri
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:personblurb($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        anchor
+        formalpara
+        info
+        para
+        simpara
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:personname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        firstname
+        honorific
+        indexterm
+        inlinemediaobject
+        lineage
+        link
+        olink
+        othername
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        surname
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:phone($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:phrase($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:pob($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:postcode($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:preface($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossary
+        glosslist
+        important
+        index
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        refentry
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        sect1
+        section
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        toc
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:primary($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        sortas
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:primaryie($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        linkends
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:printhistory($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        anchor
+        formalpara
+        para
+        simpara
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:procedure($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        step
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:production($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        constraint
+        lhs
+        rhs
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:productionrecap($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:productionset($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        production
+        productionrecap
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:productname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:productnumber($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:programlisting($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        continuation
+        dir
+        href
+        id
+        lang
+        language
+        linenumbering
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        space
+        startinglinenumber
+        title
+        type
+        userlevel
+        vendor
+        version
+        width
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        co
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        info
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        lineannotation
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        textobject
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:programlistingco($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        areaspec
+        calloutlist
+        info
+        programlisting
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:prompt($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        co
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:property($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:pubdate($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:publisher($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        publishername
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:publishername($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:qandadiv($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandadiv
+        qandaentry
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:qandaentry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        answer
+        info
+        question
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:qandaset($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        defaultlabel
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandadiv
+        qandaentry
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:question($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        label
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:quote($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refclass($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        application
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refdescriptor($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refentry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        indexterm
+        info
+        refmeta
+        refnamediv
+        refsect1
+        refsection
+        refsynopsisdiv
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refentrytitle($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:reference($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        partintro
+        refentry
+        subtitle
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refmeta($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        indexterm
+        manvolnum
+        refentrytitle
+        refmiscinfo
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refmiscinfo($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otherclass
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refnamediv($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        refclass
+        refdescriptor
+        refname
+        refpurpose
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refpurpose($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refsect1($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        refsect2
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refsect2($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        refsect3
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refsect3($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refsection($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        refsection
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:refsynopsisdiv($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        refsect2
+        refsection
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:releaseinfo($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:remark($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:replaceable($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        co
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:returnvalue($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:revdescription($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:revhistory($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        revision
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:revision($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        author
+        authorinitials
+        date
+        revdescription
+        revnumber
+        revremark
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:revnumber($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:revremark($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:rhs($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        lineannotation
+        nonterminal
+        sbr
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:row($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        rowsep
+        security
+        show
+        title
+        type
+        userlevel
+        valign
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        entry
+        entrytbl
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:sbr($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:screen($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        continuation
+        dir
+        href
+        id
+        lang
+        language
+        linenumbering
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        space
+        startinglinenumber
+        title
+        type
+        userlevel
+        vendor
+        version
+        width
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        co
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        info
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        lineannotation
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        textobject
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:screenco($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        areaspec
+        calloutlist
+        info
+        screen
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:screenshot($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        mediaobject
+        subtitle
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:secondary($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        sortas
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:secondaryie($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        linkends
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:sect1($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossary
+        glosslist
+        important
+        index
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        sect2
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        toc
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:sect2($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossary
+        glosslist
+        important
+        index
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        sect3
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        toc
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:sect3($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossary
+        glosslist
+        important
+        index
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        sect4
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        toc
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:sect4($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossary
+        glosslist
+        important
+        index
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        sect5
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        toc
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:sect5($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossary
+        glosslist
+        important
+        index
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        toc
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:section($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliography
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glossary
+        glosslist
+        important
+        index
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        refentry
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        section
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        simplesect
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        toc
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:see($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:seealso($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:seealsoie($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        linkends
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:seeie($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:seg($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:seglistitem($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        seg
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:segmentedlist($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        seglistitem
+        segtitle
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:segtitle($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:seriesvolnums($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:set($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        book
+        info
+        set
+        setindex
+        subtitle
+        title
+        titleabbrev
+        toc
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:setindex($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexdiv
+        indexentry
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:shortaffil($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:shortcut($node as node(), $model as map()) {
+    (: Attributes:
+        action
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        otheraction
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        keycap
+        keycombo
+        keysym
+        mousebutton
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:sidebar($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:simpara($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        info
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:simplelist($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        columns
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        member
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:simplemsgentry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        msgaud
+        msglevel
+        msgorig
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        msgexplan
+        msgtext
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:simplesect($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        label
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        status
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:spanspec($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        align
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        char
+        charoff
+        colsep
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        nameend
+        namest
+        os
+        remap
+        revision
+        revisionflag
+        role
+        rowsep
+        security
+        show
+        spanname
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:state($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:step($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        performance
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        stepalternatives
+        substeps
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:stepalternatives($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        performance
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        step
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:street($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:subject($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        weight
+        wordsize
+        xreflabel
+   Child Elements:
+        subjectterm
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:subjectset($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        scheme
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        subject
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:subjectterm($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:subscript($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:substeps($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        performance
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        step
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:subtitle($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:superscript($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:surname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:symbol($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:synopfragment($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        arg
+        group
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:synopfragmentref($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:synopsis($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        continuation
+        dir
+        href
+        id
+        label
+        lang
+        language
+        linenumbering
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        space
+        startinglinenumber
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        co
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        info
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        lineannotation
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        textobject
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:systemitem($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        co
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:table($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        border
+        cellpadding
+        cellspacing
+        class
+        colsep
+        condition
+        conformance
+        dir
+        floatstyle
+        frame
+        href
+        id
+        label
+        lang
+        linkend
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        orient
+        os
+        pgwide
+        remap
+        revision
+        revisionflag
+        role
+        rowheader
+        rowsep
+        rules
+        security
+        shortentry
+        show
+        style
+        summary
+        tabstyle
+        title
+        tocentry
+        type
+        userlevel
+        vendor
+        version
+        width
+        wordsize
+        xreflabel
+   Child Elements:
+        caption
+        col
+        colgroup
+        indexterm
+        info
+        mediaobject
+        tbody
+        textobject
+        tfoot
+        tgroup
+        thead
+        title
+        titleabbrev
+        tr
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tag($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        namespace
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:task($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        example
+        info
+        procedure
+        subtitle
+        taskprerequisites
+        taskrelated
+        tasksummary
+        title
+        titleabbrev
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:taskprerequisites($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:taskrelated($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tasksummary($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tbody($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        align
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        char
+        charoff
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        style
+        title
+        type
+        userlevel
+        valign
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        row
+        tr
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:td($node as node(), $model as map()) {
+    (: Attributes:
+        abbr
+        align
+        annotations
+        arch
+        audience
+        axis
+        base
+        char
+        charoff
+        class
+        colspan
+        condition
+        conformance
+        dir
+        headers
+        id
+        lang
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        os
+        remap
+        revision
+        revisionflag
+        rowspan
+        scope
+        security
+        style
+        title
+        userlevel
+        valign
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        address
+        alt
+        anchor
+        annotation
+        application
+        author
+        bibliolist
+        biblioref
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        classsynopsis
+        cmdsynopsis
+        code
+        command
+        computeroutput
+        constant
+        constraintdef
+        constructorsynopsis
+        coref
+        database
+        date
+        destructorsynopsis
+        editor
+        email
+        emphasis
+        envar
+        epigraph
+        equation
+        errorcode
+        errorname
+        errortext
+        errortype
+        example
+        exceptionname
+        fieldsynopsis
+        figure
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        formalpara
+        funcsynopsis
+        function
+        glosslist
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        itemizedlist
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        literallayout
+        markup
+        mediaobject
+        menuchoice
+        methodname
+        methodsynopsis
+        modifier
+        mousebutton
+        msgset
+        nonterminal
+        note
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        orderedlist
+        org
+        orgname
+        package
+        para
+        parameter
+        person
+        personname
+        phrase
+        procedure
+        productionset
+        productname
+        productnumber
+        programlisting
+        programlistingco
+        prompt
+        property
+        qandaset
+        quote
+        remark
+        replaceable
+        returnvalue
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        shortcut
+        sidebar
+        simpara
+        simplelist
+        subscript
+        superscript
+        symbol
+        synopsis
+        systemitem
+        table
+        tag
+        task
+        termdef
+        tip
+        token
+        trademark
+        type
+        uri
+        userinput
+        variablelist
+        varname
+        warning
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:term($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:termdef($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        baseform
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        sortas
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tertiary($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        sortas
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tertiaryie($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        id
+        lang
+        linkends
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:textdata($node as node(), $model as map()) {
+    (: Attributes:
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        dir
+        encoding
+        entityref
+        fileref
+        format
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:textobject($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        phrase
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        textdata
+        tip
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tfoot($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        align
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        char
+        charoff
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        style
+        title
+        type
+        userlevel
+        valign
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        colspec
+        row
+        tr
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tgroup($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        align
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        char
+        charoff
+        cols
+        colsep
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        rowsep
+        security
+        show
+        tgroupstyle
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        colspec
+        spanspec
+        tbody
+        tfoot
+        thead
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:th($node as node(), $model as map()) {
+    (: Attributes:
+        abbr
+        align
+        annotations
+        arch
+        audience
+        axis
+        base
+        char
+        charoff
+        class
+        colspan
+        condition
+        conformance
+        dir
+        headers
+        id
+        lang
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        os
+        remap
+        revision
+        revisionflag
+        rowspan
+        scope
+        security
+        style
+        title
+        userlevel
+        valign
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        address
+        alt
+        anchor
+        annotation
+        application
+        author
+        bibliolist
+        biblioref
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        classsynopsis
+        cmdsynopsis
+        code
+        command
+        computeroutput
+        constant
+        constraintdef
+        constructorsynopsis
+        coref
+        database
+        date
+        destructorsynopsis
+        editor
+        email
+        emphasis
+        envar
+        epigraph
+        equation
+        errorcode
+        errorname
+        errortext
+        errortype
+        example
+        exceptionname
+        fieldsynopsis
+        figure
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        formalpara
+        funcsynopsis
+        function
+        glosslist
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        important
+        indexterm
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        itemizedlist
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        literallayout
+        markup
+        mediaobject
+        menuchoice
+        methodname
+        methodsynopsis
+        modifier
+        mousebutton
+        msgset
+        nonterminal
+        note
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        orderedlist
+        org
+        orgname
+        package
+        para
+        parameter
+        person
+        personname
+        phrase
+        procedure
+        productionset
+        productname
+        productnumber
+        programlisting
+        programlistingco
+        prompt
+        property
+        qandaset
+        quote
+        remark
+        replaceable
+        returnvalue
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        shortcut
+        sidebar
+        simpara
+        simplelist
+        subscript
+        superscript
+        symbol
+        synopsis
+        systemitem
+        table
+        tag
+        task
+        termdef
+        tip
+        token
+        trademark
+        type
+        uri
+        userinput
+        variablelist
+        varname
+        warning
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:thead($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        align
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        char
+        charoff
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        style
+        title
+        type
+        userlevel
+        valign
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        colspec
+        row
+        tr
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tip($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:title($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:titleabbrev($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:toc($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        tocdiv
+        tocentry
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tocdiv($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        pagenum
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        subtitle
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        tocdiv
+        tocentry
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tocentry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        pagenum
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        abbrev
+        accel
+        acronym
+        alt
+        anchor
+        annotation
+        application
+        author
+        biblioref
+        citation
+        citebiblioid
+        citerefentry
+        citetitle
+        classname
+        code
+        command
+        computeroutput
+        constant
+        coref
+        database
+        date
+        editor
+        email
+        emphasis
+        envar
+        errorcode
+        errorname
+        errortext
+        errortype
+        exceptionname
+        filename
+        firstterm
+        footnote
+        footnoteref
+        foreignphrase
+        function
+        glossterm
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        hardware
+        indexterm
+        initializer
+        inlineequation
+        inlinemediaobject
+        interfacename
+        jobtitle
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        methodname
+        modifier
+        mousebutton
+        nonterminal
+        olink
+        ooclass
+        ooexception
+        oointerface
+        option
+        optional
+        org
+        orgname
+        package
+        parameter
+        person
+        personname
+        phrase
+        productname
+        productnumber
+        prompt
+        property
+        quote
+        remark
+        replaceable
+        returnvalue
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        trademark
+        type
+        uri
+        userinput
+        varname
+        wordasword
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:token($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:tr($node as node(), $model as map()) {
+    (: Attributes:
+        align
+        annotations
+        arch
+        audience
+        base
+        char
+        charoff
+        class
+        condition
+        conformance
+        dir
+        id
+        lang
+        onclick
+        ondblclick
+        onkeydown
+        onkeypress
+        onkeyup
+        onmousedown
+        onmousemove
+        onmouseout
+        onmouseover
+        onmouseup
+        os
+        remap
+        revision
+        revisionflag
+        security
+        style
+        title
+        userlevel
+        valign
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        td
+        th
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:trademark($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        class
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:type($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:uri($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:userinput($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        accel
+        alt
+        anchor
+        annotation
+        biblioref
+        co
+        code
+        command
+        computeroutput
+        constant
+        email
+        envar
+        filename
+        guibutton
+        guiicon
+        guilabel
+        guimenu
+        guimenuitem
+        guisubmenu
+        indexterm
+        inlinemediaobject
+        keycap
+        keycode
+        keycombo
+        keysym
+        link
+        literal
+        markup
+        menuchoice
+        mousebutton
+        nonterminal
+        olink
+        option
+        optional
+        package
+        parameter
+        prompt
+        property
+        remark
+        replaceable
+        shortcut
+        subscript
+        superscript
+        symbol
+        systemitem
+        tag
+        termdef
+        token
+        uri
+        userinput
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:varargs($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:variablelist($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        spacing
+        termlength
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        varlistentry
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:varlistentry($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        listitem
+        term
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:varname($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:videodata($node as node(), $model as map()) {
+    (: Attributes:
+        align
+        annotations
+        arch
+        audience
+        base
+        condition
+        conformance
+        contentdepth
+        contentwidth
+        depth
+        dir
+        entityref
+        fileref
+        format
+        id
+        lang
+        os
+        remap
+        revision
+        revisionflag
+        role
+        scale
+        scalefit
+        security
+        userlevel
+        valign
+        vendor
+        version
+        width
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:videoobject($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        info
+        videodata
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:void($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:volumenum($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:warning($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        address
+        anchor
+        annotation
+        bibliolist
+        blockquote
+        bridgehead
+        calloutlist
+        caution
+        classsynopsis
+        cmdsynopsis
+        constraintdef
+        constructorsynopsis
+        destructorsynopsis
+        epigraph
+        equation
+        example
+        fieldsynopsis
+        figure
+        formalpara
+        funcsynopsis
+        glosslist
+        important
+        indexterm
+        info
+        informalequation
+        informalexample
+        informalfigure
+        informaltable
+        itemizedlist
+        literallayout
+        mediaobject
+        methodsynopsis
+        msgset
+        note
+        orderedlist
+        para
+        procedure
+        productionset
+        programlisting
+        programlistingco
+        qandaset
+        remark
+        revhistory
+        screen
+        screenco
+        screenshot
+        segmentedlist
+        sidebar
+        simpara
+        simplelist
+        synopsis
+        table
+        task
+        tip
+        title
+        titleabbrev
+        variablelist
+        warning
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:wordasword($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:xref($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        endterm
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+        xrefstyle
+   Child Elements:
+
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
+
+declare function db5-common:year($node as node(), $model as map()) {
+    (: Attributes:
+        actuate
+        annotations
+        arch
+        arcrole
+        audience
+        base
+        condition
+        conformance
+        dir
+        href
+        id
+        lang
+        linkend
+        os
+        remap
+        revision
+        revisionflag
+        role
+        security
+        show
+        title
+        type
+        userlevel
+        vendor
+        version
+        wordsize
+        xreflabel
+   Child Elements:
+        alt
+        anchor
+        annotation
+        biblioref
+        indexterm
+        inlinemediaobject
+        link
+        olink
+        phrase
+        remark
+        replaceable
+        subscript
+        superscript
+        xref
+ :)
+    element {$node/name()} { $node/@*, db5-common:recurse($node, $model) }
+};
