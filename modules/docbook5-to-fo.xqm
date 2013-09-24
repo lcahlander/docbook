@@ -4,6 +4,13 @@ module namespace db5-to-fo="http://docbook.org/apps/docbook/5/fo";
 
 declare namespace db="http://docbook.org/ns/docbook";
 
+declare function db5-to-fo:docbook2fo($docbook as node()*) as item()*
+{
+    let $stylesheet := "xmldb:///db/apps/docbook/stylesheets/fo/docbook.xsl"
+    return
+        transform:transform($docbook, $stylesheet, ())
+};
+
 declare function db5-to-fo:process-node($node as node()?, $model as map()) {
     if ($node) then 
     typeswitch($node) 
