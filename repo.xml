@@ -10,4 +10,5 @@
     <target>docbook</target>
     <prepare>pre-install.xql</prepare>
     <finish/>
+    <deployed>2013-11-03T07:59:22.149-08:00</deployed>
 </meta>

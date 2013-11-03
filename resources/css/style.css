@@ -1,1 +1,25 @@
 /* Application styles could go here */
+
+.xfFullGroup .xfLabel { width: 4in}
+.xfFullGroup .xfControl .xfValue { width: 3in}
+.popSourceBlock { display:none; }
+.xfSelect1 .xfValue { width: 3.5in; height: 4in}
+.filter-button { width: 90% }
+.xfSubmit .filter-button { width: 90% }
+
+body .bf  {
+  color: #222;
+  background: #eee;
+}
+
+.xfContainer { background:#ddd; }
+
+@media (min-width: 768px)
+.navbar-nav>li>span {
+padding-top: 15px;
+padding-bottom: 15px;
+}
+
+.panel-body {
+  background-color: white;
+}

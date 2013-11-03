@@ -2,7 +2,20 @@ xquery version "3.0";
 
 module namespace db5-to-html="http://docbook.org/apps/docbook/5/html";
 
+import module namespace functx="http://www.functx.com" at "functx.xqm";
+
 declare namespace db="http://docbook.org/ns/docbook";
+declare namespace svg="http://www.w3.org/2000/svg";
+declare namespace mml="http://www.w3.org/1998/Math/MathML";
+declare namespace xlink="http://www.w3.org/1999/xlink";
+declare namespace xi="http://www.w3.org/2001/XInclude";
+
+declare function db5-to-html:docbook2html($docbook as node()*) as item()*
+{
+    let $stylesheet := "xmldb:///db/apps/docbook/stylesheets/html/docbook.xsl"
+    return
+        transform:transform($docbook, $stylesheet, ())
+};
 
 declare function db5-to-html:process-node($node as node()?, $model as map()) {
     if ($node) then 
@@ -181,7 +194,7 @@ declare function db5-to-html:process-node($node as node()?, $model as map()) {
         case element(db:literallayout) return db5-to-html:literallayout($node, $model)
         case element(db:locator) return db5-to-html:locator($node, $model)
         case element(db:manvolnum) return db5-to-html:manvolnum($node, $model)
-        case element(db:markup) return db5-to-html:markup($node, $model)
+        case element(db:markup) return db5-to-html:code($node, $model)
         case element(db:mathphrase) return db5-to-html:mathphrase($node, $model)
         case element(db:mediaobject) return db5-to-html:mediaobject($node, $model)
         case element(db:member) return db5-to-html:member($node, $model)
@@ -242,7 +255,7 @@ declare function db5-to-html:process-node($node as node()?, $model as map()) {
         case element(db:productionset) return db5-to-html:productionset($node, $model)
         case element(db:productname) return db5-to-html:productname($node, $model)
         case element(db:productnumber) return db5-to-html:productnumber($node, $model)
-        case element(db:programlisting) return db5-to-html:programlisting($node, $model)
+        case element(db:programlisting) return db5-to-html:code($node, $model)
         case element(db:programlistingco) return db5-to-html:programlistingco($node, $model)
         case element(db:prompt) return db5-to-html:prompt($node, $model)
         case element(db:property) return db5-to-html:property($node, $model)
@@ -281,7 +294,7 @@ declare function db5-to-html:process-node($node as node()?, $model as map()) {
         case element(db:rhs) return db5-to-html:rhs($node, $model)
         case element(db:row) return db5-to-html:row($node, $model)
         case element(db:sbr) return db5-to-html:sbr($node, $model)
-        case element(db:screen) return db5-to-html:screen($node, $model)
+        case element(db:screen) return db5-to-html:code($node, $model)
         case element(db:screenco) return db5-to-html:screenco($node, $model)
         case element(db:screenshot) return db5-to-html:screenshot($node, $model)
         case element(db:secondary) return db5-to-html:secondary($node, $model)
@@ -326,7 +339,7 @@ declare function db5-to-html:process-node($node as node()?, $model as map()) {
         case element(db:symbol) return db5-to-html:symbol($node, $model)
         case element(db:synopfragment) return db5-to-html:synopfragment($node, $model)
         case element(db:synopfragmentref) return db5-to-html:synopfragmentref($node, $model)
-        case element(db:synopsis) return db5-to-html:synopsis($node, $model)
+        case element(db:synopsis) return db5-to-html:code($node, $model)
         case element(db:systemitem) return db5-to-html:systemitem($node, $model)
         case element(db:table) return db5-to-html:table($node, $model)
         case element(db:tag) return db5-to-html:tag($node, $model)
@@ -370,12 +383,29 @@ declare function db5-to-html:process-node($node as node()?, $model as map()) {
         case element(db:wordasword) return db5-to-html:wordasword($node, $model)
         case element(db:xref) return db5-to-html:xref($node, $model)
         case element(db:year) return db5-to-html:year($node, $model)
+        case element(svg:svg) return functx:change-element-ns-deep(($node), "http://www.w3.org/2000/svg", "") 
+        case element(mml:math) return functx:change-element-ns-deep(($node), 'http://www.w3.org/1998/Math/MathML', '')
         default return     element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) } 
     else () 
 };
 
 declare function db5-to-html:recurse($node as node()?, $model as map()) as item()* {
     if ($node) then for $cnode in $node/node() return db5-to-html:process-node($cnode, $model) else ()
+};
+
+declare %private function db5-to-html:print-authors($root as element(), $model as map()) {
+    <div class="authors">
+    {
+        for $author in $root/db:info/db:author
+        return
+            <address>
+                <strong>{$author/db:personname/db:firstname} {$author/db:personname/db:surname}</strong>
+                { for $jobtitle in $author/jobtitle return (<br/>, $author/jobtitle/text()) }
+                { for $orgname in $author/orgname return (<br/>, $author/orgname/text()) }
+                { for $email in $author/email return (<br/>, <a href="mailto:{$author/email}">{$author/email/text()}</a>) }
+            </address>
+    }
+    </div>
 };
 
 declare function db5-to-html:abbrev($node as node(), $model as map()) {
@@ -424,7 +454,7 @@ declare function db5-to-html:abbrev($node as node(), $model as map()) {
         trademark
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'abbr'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:abstract($node as node(), $model as map()) {
@@ -465,7 +495,14 @@ declare function db5-to-html:abstract($node as node(), $model as map()) {
         title
         titleabbrev
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Abstract</h3>
+  </div>
+  <div class="panel-body">
+    {db5-to-html:recurse($node, $model)}
+  </div>
+</div>
 };
 
 declare function db5-to-html:accel($node as node(), $model as map()) {
@@ -722,7 +759,7 @@ declare function db5-to-html:address($node as node(), $model as map()) {
         uri
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'address'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:affiliation($node as node(), $model as map()) {
@@ -1441,7 +1478,15 @@ declare function db5-to-html:article($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <article>
+    <h1>{db5-to-html:process-node($node/db:info/db:title, $model)}</h1>
+    {    
+        db5-to-html:process-node($node/db:info/db:abstract, $model),
+        for $cnode in $node/node() 
+        where not(('info', 'sidebar') = $cnode/local-name())
+        return db5-to-html:process-node($cnode, $model) 
+    }
+    </article>
 };
 
 declare function db5-to-html:artpagenums($node as node(), $model as map()) {
@@ -1651,7 +1696,7 @@ declare function db5-to-html:author($node as node(), $model as map()) {
         personname
         uri
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <span><em>by</em> {db5-to-html:recurse($node, $model) }</span>
 };
 
 declare function db5-to-html:authorgroup($node as node(), $model as map()) {
@@ -1688,7 +1733,22 @@ declare function db5-to-html:authorgroup($node as node(), $model as map()) {
         editor
         othercredit
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    if ($node/db:author) 
+     then if (count($node/db:author) > 1) 
+          then <div><em>By:</em> { string-join(for $editor in $node/db:author return db5-to-html:recurse($editor, $model), ', ') }</div> 
+          else db5-to-html:process-node($node/db:author[1], $model)
+     else (),
+    if ($node/db:editor) 
+     then if (count($node/db:editor) > 1)
+          then <div><em>Edited by:</em> { string-join(for $editor in $node/db:editor return db5-to-html:recurse($editor, $model), ', ') }</div> 
+          else db5-to-html:process-node($node/db:editor[1], $model)
+     else ()
+     ,
+    if ($node/db:othercredit) 
+     then if (count($node/db:othercredit) > 1)
+          then <div><em>Others:</em> { string-join(for $editor in $node/db:othercredit return db5-to-html:recurse($editor, $model), ', ') }</div> 
+          else db5-to-html:process-node($node/db:othercredit[1], $model)
+     else ()
 };
 
 declare function db5-to-html:authorinitials($node as node(), $model as map()) {
@@ -2825,7 +2885,7 @@ declare function db5-to-html:blockquote($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'blockquote'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:book($node as node(), $model as map()) {
@@ -2878,7 +2938,15 @@ declare function db5-to-html:book($node as node(), $model as map()) {
         titleabbrev
         toc
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <article>
+    <h1>{db5-to-html:process-node($node/db:info/db:title, $model)}</h1>
+    {    
+        db5-to-html:process-node($node/db:info/db:abstract, $model),
+        for $cnode in $node/node() 
+        where not(('info', 'sidebar') = $cnode/local-name())
+        return db5-to-html:process-node($cnode, $model) 
+    }
+    </article>
 };
 
 declare function db5-to-html:bridgehead($node as node(), $model as map()) {
@@ -3484,7 +3552,10 @@ declare function db5-to-html:chapter($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <section>
+    <a name="D{$node/@exist:id}"></a>
+    {db5-to-html:recurse($node, $model)}
+    </section>
 };
 
 declare function db5-to-html:citation($node as node(), $model as map()) {
@@ -4252,7 +4323,22 @@ declare function db5-to-html:code($node as node(), $model as map()) {
         varname
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    let $lang := 
+        if ($node//markup) then
+            "xml"
+        else if ($node/@language) then
+            $node/@language
+        else
+            ()
+    return
+        if ($lang) then
+            <div class="highlight" data-language="{$lang}">
+            <pre><code class="{$lang}">{ replace($node/string(), "^\s+", "") }</code></pre>
+            </div>
+        else
+            <div class="highlight" data-language="xml">
+            <pre>{ replace($node/string(), "^\s+", "") }</pre>
+            </div>
 };
 
 declare function db5-to-html:col($node as node(), $model as map()) {
@@ -4521,7 +4607,7 @@ declare function db5-to-html:colspec($node as node(), $model as map()) {
    Child Elements:
 
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'col'} { db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:command($node as node(), $model as map()) {
@@ -5267,7 +5353,7 @@ declare function db5-to-html:copyright($node as node(), $model as map()) {
         holder
         year
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <div><span class="glyphicon glyphicon-copyright-mark"></span> { db5-to-html:recurse($node, $model) }</div>
 };
 
 declare function db5-to-html:coref($node as node(), $model as map()) {
@@ -5919,7 +6005,7 @@ declare function db5-to-html:emphasis($node as node(), $model as map()) {
         wordasword
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'em'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:entry($node as node(), $model as map()) {
@@ -6114,7 +6200,7 @@ declare function db5-to-html:entry($node as node(), $model as map()) {
         wordasword
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'td'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:entrytbl($node as node(), $model as map()) {
@@ -6845,7 +6931,18 @@ declare function db5-to-html:figure($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    let $float := $node/@floatstyle
+    return
+        <figure>
+            { if ($float) then attribute class { "float-" || $float } else () }
+            {db5-to-html:process-node($node/*[not(self::db:title)], $model)}
+            {
+                if ($node/db:title) then
+                    <figcaption>{$node/db:title/text()}</figcaption>
+                else
+                    ()
+            }
+        </figure>
 };
 
 declare function db5-to-html:filename($node as node(), $model as map()) {
@@ -9015,7 +9112,14 @@ declare function db5-to-html:imagedata($node as node(), $model as map()) {
    Child Elements:
         info
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    if ($node/@fileref)
+    then
+        let $align := $node/@align
+        let $class := if ($align) then "pull-" || $align else ""
+        return
+            <img src="{$node/@fileref}" class="{$class}"/>
+    else                    
+        db5-to-html:recurse($node, $model)
 };
 
 declare function db5-to-html:imageobject($node as node(), $model as map()) {
@@ -9181,7 +9285,15 @@ declare function db5-to-html:important($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <div class="alert alert-danger">
+    {
+        if ($node/db:title) then
+            <h2>Note: { db5-to-html:recurse($node/db:title, $model) }</h2>
+        else
+            ()
+    }
+    { db5-to-html:recurse($node/* except $node/db:title, $model) }
+    </div>
 };
 
 declare function db5-to-html:index($node as node(), $model as map()) {
@@ -9571,7 +9683,12 @@ declare function db5-to-html:informalequation($node as node(), $model as map()) 
         mathphrase
         mediaobject
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'div'} { 
+        attribute {'class'} 
+                  { if ($node/@role) then $node/local-name() || ' ' || $node/@role else $node/local-name()}, 
+        $node/@*, 
+        db5-to-html:recurse($node, $model) 
+    }
 };
 
 declare function db5-to-html:informalexample($node as node(), $model as map()) {
@@ -10145,7 +10262,7 @@ declare function db5-to-html:itemizedlist($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'ul'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:itermset($node as node(), $model as map()) {
@@ -10889,7 +11006,11 @@ declare function db5-to-html:link($node as node(), $model as map()) {
         wordasword
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    if ($node/@condition = '_blank')
+    then
+        <a href="{$node/@xlink:href}" target="_blank">{db5-to-html:recurse($node, $model)}</a>
+    else
+        <a href="{$node/@xlink:href}">{db5-to-html:recurse($node, $model)}</a>
 };
 
 declare function db5-to-html:listitem($node as node(), $model as map()) {
@@ -10979,7 +11100,7 @@ declare function db5-to-html:listitem($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'li'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:literal($node as node(), $model as map()) {
@@ -11343,7 +11464,12 @@ declare function db5-to-html:mathphrase($node as node(), $model as map()) {
         superscript
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'span'} 
+            { 
+              attribute { 'class' } { $node/local-name() },
+              $node/@*, 
+              db5-to-html:recurse($node, $model) 
+            }
 };
 
 declare function db5-to-html:mediaobject($node as node(), $model as map()) {
@@ -12505,7 +12631,15 @@ declare function db5-to-html:note($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <div class="alert alert-info">
+    {
+        if ($node/db:title) then
+            <h2>Note: { db5-to-html:recurse($node/db:title, $model) }</h2>
+        else
+            ()
+    }
+    { db5-to-html:recurse($node/* except $node/db:title, $model) }
+    </div>
 };
 
 declare function db5-to-html:olink($node as node(), $model as map()) {
@@ -12940,7 +13074,7 @@ declare function db5-to-html:orderedlist($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'ol'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:org($node as node(), $model as map()) {
@@ -13580,7 +13714,7 @@ declare function db5-to-html:para($node as node(), $model as map()) {
         wordasword
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'p'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:paramdef($node as node(), $model as map()) {
@@ -17576,7 +17710,7 @@ declare function db5-to-html:row($node as node(), $model as map()) {
         entry
         entrytbl
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'tr'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:sbr($node as node(), $model as map()) {
@@ -18183,7 +18317,9 @@ declare function db5-to-html:sect1($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <section>
+    {db5-to-html:recurse($node, $model)}
+    </section>
 };
 
 declare function db5-to-html:sect2($node as node(), $model as map()) {
@@ -18284,7 +18420,9 @@ declare function db5-to-html:sect2($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <section>
+    {db5-to-html:recurse($node, $model)}
+    </section>
 };
 
 declare function db5-to-html:sect3($node as node(), $model as map()) {
@@ -18385,7 +18523,9 @@ declare function db5-to-html:sect3($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <section>
+    {db5-to-html:recurse($node, $model)}
+    </section>
 };
 
 declare function db5-to-html:sect4($node as node(), $model as map()) {
@@ -18486,7 +18626,9 @@ declare function db5-to-html:sect4($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <section>
+    {db5-to-html:recurse($node, $model)}
+    </section>
 };
 
 declare function db5-to-html:sect5($node as node(), $model as map()) {
@@ -18586,7 +18728,9 @@ declare function db5-to-html:sect5($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <section>
+    {db5-to-html:recurse($node, $model)}
+    </section>
 };
 
 declare function db5-to-html:section($node as node(), $model as map()) {
@@ -18688,7 +18832,10 @@ declare function db5-to-html:section($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <section>
+    <a name="D{$node/@exist:id}"></a>
+    {db5-to-html:recurse($node, $model)}
+    </section>
 };
 
 declare function db5-to-html:see($node as node(), $model as map()) {
@@ -21299,7 +21446,10 @@ declare function db5-to-html:table($node as node(), $model as map()) {
         titleabbrev
         tr
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'table'} 
+            { attribute {'class'} {'table table-striped'}, 
+              if ($node/@frame/string() = 'all') then attribute {'frame'}{'border'} else $node/@frame, 
+              db5-to-html:recurse(functx:change-element-names-deep(($node), (QName('http://docbook.org/ns/docbook','title')),(QName('http://docbook.org/ns/docbook','caption'))), $model) }
 };
 
 declare function db5-to-html:tag($node as node(), $model as map()) {
@@ -21720,7 +21870,7 @@ declare function db5-to-html:tbody($node as node(), $model as map()) {
         row
         tr
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'tbody'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:td($node as node(), $model as map()) {
@@ -21918,7 +22068,7 @@ declare function db5-to-html:td($node as node(), $model as map()) {
         wordasword
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'td'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:term($node as node(), $model as map()) {
@@ -22620,7 +22770,7 @@ declare function db5-to-html:tfoot($node as node(), $model as map()) {
         row
         tr
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'tfoot'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:tgroup($node as node(), $model as map()) {
@@ -22666,7 +22816,7 @@ declare function db5-to-html:tgroup($node as node(), $model as map()) {
         tfoot
         thead
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    db5-to-html:recurse($node, $model) 
 };
 
 declare function db5-to-html:th($node as node(), $model as map()) {
@@ -22864,7 +23014,7 @@ declare function db5-to-html:th($node as node(), $model as map()) {
         wordasword
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'th'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:thead($node as node(), $model as map()) {
@@ -22917,7 +23067,7 @@ declare function db5-to-html:thead($node as node(), $model as map()) {
         row
         tr
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'thead'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:tip($node as node(), $model as map()) {
@@ -23141,7 +23291,19 @@ declare function db5-to-html:title($node as node(), $model as map()) {
         wordasword
         xref
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+        let $level := count($node/(ancestor::db:chapter|ancestor::db:section)) + 1
+        return
+            element { "h" || $level } {
+                if ($level = 1) then
+                    attribute class { "front-title" }
+                else
+                    (),
+                if ($node/../@id) then
+                    <a name="{$node/../@id}"></a>
+                else
+                    <a name="D{$node/../@exist:id}"></a>,
+                db5-to-html:recurse($node, $model)
+            }
 };
 
 declare function db5-to-html:titleabbrev($node as node(), $model as map()) {
@@ -23689,7 +23851,7 @@ declare function db5-to-html:tr($node as node(), $model as map()) {
         td
         th
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    element {'tr'} { $node/@*, db5-to-html:recurse($node, $model) }
 };
 
 declare function db5-to-html:trademark($node as node(), $model as map()) {
@@ -24383,7 +24545,15 @@ declare function db5-to-html:warning($node as node(), $model as map()) {
         variablelist
         warning
  :)
-    element {$node/name()} { $node/@*, db5-to-html:recurse($node, $model) }
+    <div class="alert alert-warning">
+    {
+        if ($node/db:title) then
+            <h2>Note: { db5-to-html:recurse($node/db:title, $model) }</h2>
+        else
+            ()
+    }
+    { db5-to-html:recurse($node/* except $node/db:title, $model) }
+    </div>
 };
 
 declare function db5-to-html:wordasword($node as node(), $model as map()) {
